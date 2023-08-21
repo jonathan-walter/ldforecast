@@ -13,24 +13,24 @@ habitat<-raster(here("Data/forest_canopy_5km.tif")) ## <----- this data file had
 defoliation <- read.csv("Data/Defol.csv")
 defol <- rep(defoliation[1:10,2], each=132000)
 ##connect 2001-2010
-connectivity01<-raster(here("JuliaScripts/Full Extent/2001_5km_output/cum_currmap.tif"))
-connectivity02<-raster(here("JuliaScripts/Full Extent/2002_5km_output/cum_currmap.tif"))
-connectivity03<-raster(here("JuliaScripts/Full Extent/2003_5km_output/cum_currmap.tif"))
-connectivity04<-raster(here("JuliaScripts/Full Extent/2004_5km_output/cum_currmap.tif"))
-connectivity05<-raster(here("JuliaScripts/Full Extent/2005_5km_output/cum_currmap.tif"))
-connectivity06<-raster(here("JuliaScripts/Full Extent/2006_5km_output/cum_currmap.tif"))
-connectivity07<-raster(here("JuliaScripts/Full Extent/2007_5km_output/cum_currmap.tif"))
-connectivity08<-raster(here("JuliaScripts/Full Extent/2008_5km_output/cum_currmap.tif"))
-connectivity09<-raster(here("JuliaScripts/Full Extent/2009_5km_output/cum_currmap.tif"))
-connectivity10<-raster(here("JuliaScripts/Full Extent/2010_5km_output/cum_currmap.tif"))
-connectivity11<-raster(here("JuliaScripts/Full Extent/2011_5km_output/cum_currmap.tif"))
-connectivity12<-raster(here("JuliaScripts/Full Extent/2012_5km_output/cum_currmap.tif"))
-connectivity13<-raster(here("JuliaScripts/Full Extent/2013_5km_output/cum_currmap.tif"))
-connectivity14<-raster(here("JuliaScripts/Full Extent/2014_5km_output/cum_currmap.tif"))
-connectivity15<-raster(here("JuliaScripts/Full Extent/2015_5km_output/cum_currmap.tif"))
-connectivity16<-raster(here("JuliaScripts/Full Extent/2016_5km_output/cum_currmap.tif"))
-connectivity17<-raster(here("JuliaScripts/Full Extent/2017_5km_output/cum_currmap.tif"))
-connectivity18<-raster(here("JuliaScripts/Full Extent/2018_5km_output/cum_currmap.tif"))
+connectivity01<-raster(here("JuliaScripts/Full Extent/2001_10km_output/cum_currmap.tif"))
+connectivity02<-raster(here("JuliaScripts/Full Extent/2002_10km_output/cum_currmap.tif"))
+connectivity03<-raster(here("JuliaScripts/Full Extent/2003_10km_output/cum_currmap.tif"))
+connectivity04<-raster(here("JuliaScripts/Full Extent/2004_10km_output/cum_currmap.tif"))
+connectivity05<-raster(here("JuliaScripts/Full Extent/2005_10km_output/cum_currmap.tif"))
+connectivity06<-raster(here("JuliaScripts/Full Extent/2006_10km_output/cum_currmap.tif"))
+connectivity07<-raster(here("JuliaScripts/Full Extent/2007_10km_output/cum_currmap.tif"))
+connectivity08<-raster(here("JuliaScripts/Full Extent/2008_10km_output/cum_currmap.tif"))
+connectivity09<-raster(here("JuliaScripts/Full Extent/2009_10km_output/cum_currmap.tif"))
+connectivity10<-raster(here("JuliaScripts/Full Extent/2010_10km_output/cum_currmap.tif"))
+connectivity11<-raster(here("JuliaScripts/Full Extent/2011_10km_output/cum_currmap.tif"))
+connectivity12<-raster(here("JuliaScripts/Full Extent/2012_10km_output/cum_currmap.tif"))
+connectivity13<-raster(here("JuliaScripts/Full Extent/2013_10km_output/cum_currmap.tif"))
+connectivity14<-raster(here("JuliaScripts/Full Extent/2014_10km_output/cum_currmap.tif"))
+connectivity15<-raster(here("JuliaScripts/Full Extent/2015_10km_output/cum_currmap.tif"))
+connectivity16<-raster(here("JuliaScripts/Full Extent/2016_10km_output/cum_currmap.tif"))
+connectivity17<-raster(here("JuliaScripts/Full Extent/2017_10km_output/cum_currmap.tif"))
+connectivity18<-raster(here("JuliaScripts/Full Extent/2018_10km_output/cum_currmap.tif"))
 
 ##theta 2002-2011
 theta02<-raster(here("Data/Reduced/GridTraps2001_full_presence3.tif"))
@@ -288,11 +288,11 @@ falsepos <- c(falsepos2011, falsepos2012, falsepos2013, falsepos2014, falsepos20
 ## simple scatterplot
 attach(mtcars)
 par(mfrow=c(1,3))
-plot(year, accuracy, main="5km Radius, Presence 3", 
+plot(year, accuracy, main="10km Radius, Presence 3", 
      xlab="Year ", ylab="Total Accuracy", pch=19)
-plot(year, accuracypos, main="5km Radius, Presence 3", 
+plot(year, accuracypos, main="10km Radius, Presence 3", 
      xlab="Year ", ylab="True Positive", pch=19)
-plot(year, falsepos, main="5km Radius, Presence 3", 
+plot(year, falsepos, main="10km Radius, Presence 3", 
      xlab="Year ", ylab="False Positive", pch=19)
 mean(accuracy)
 mean(accuracypos)
@@ -300,69 +300,69 @@ mean(falsepos)
 ## NOTE: write these outputs to new directory ./Data/Model Predictions
 ## Write rasters to images
 psi.pred.raster11<-raster(matrix(preds1$psi, nrow(theta11), ncol(theta11), byrow=T), crs=proj4string(theta11))
-writeRaster(x=psi.pred.raster11, filename=here("./Data/Model Predictions/threshOpt/2001_2010_5km_5km_3_2011_INLA_CLIM.tif"), 
+writeRaster(x=psi.pred.raster11, filename=here("./Data/Model Predictions/threshOpt/2001_2010_5km_10km_3_2011_INLA_CLIM.tif"), 
             format="GTiff", overwrite=TRUE)
 
 psi.pred.raster12<-raster(matrix(preds2$psi, nrow(theta12), ncol(theta12), byrow=T), crs=proj4string(theta12))
-writeRaster(x=psi.pred.raster12, filename=here("./Data/Model Predictions/threshOpt/2001_2010_5km_5km_3_2012_INLA_CLIM.tif"), 
+writeRaster(x=psi.pred.raster12, filename=here("./Data/Model Predictions/threshOpt/2001_2010_5km_10km_3_2012_INLA_CLIM.tif"), 
             format="GTiff", overwrite=TRUE)
 
 psi.pred.raster13<-raster(matrix(preds3$psi, nrow(theta13), ncol(theta13), byrow=T), crs=proj4string(theta13))
-writeRaster(x=psi.pred.raster13, filename=here("./Data/Model Predictions/threshOpt/2001_2010_5km_5km_3_2013_INLA_CLIM.tif"), 
+writeRaster(x=psi.pred.raster13, filename=here("./Data/Model Predictions/threshOpt/2001_2010_5km_10km_3_2013_INLA_CLIM.tif"), 
             format="GTiff", overwrite=TRUE)
 
 psi.pred.raster14<-raster(matrix(preds4$psi, nrow(theta14), ncol(theta14), byrow=T), crs=proj4string(theta14))
-writeRaster(x=psi.pred.raster14, filename=here("./Data/Model Predictions/threshOpt/2001_2010_5km_5km_3_2014_INLA_CLIM.tif"), 
+writeRaster(x=psi.pred.raster14, filename=here("./Data/Model Predictions/threshOpt/2001_2010_5km_10km_3_2014_INLA_CLIM.tif"), 
             format="GTiff", overwrite=TRUE)
 
 psi.pred.raster15<-raster(matrix(preds5$psi, nrow(theta15), ncol(theta15), byrow=T), crs=proj4string(theta15))
-writeRaster(x=psi.pred.raster15, filename=here("./Data/Model Predictions/threshOpt/2001_2010_5km_5km_3_2015_INLA_CLIM.tif"), 
+writeRaster(x=psi.pred.raster15, filename=here("./Data/Model Predictions/threshOpt/2001_2010_5km_10km_3_2015_INLA_CLIM.tif"), 
             format="GTiff", overwrite=TRUE)
 
 psi.pred.raster16<-raster(matrix(preds6$psi, nrow(theta16), ncol(theta16), byrow=T), crs=proj4string(theta16))
-writeRaster(x=psi.pred.raster16, filename=here("./Data/Model Predictions/threshOpt/2001_2010_5km_5km_3_2016_INLA_CLIM.tif"), 
+writeRaster(x=psi.pred.raster16, filename=here("./Data/Model Predictions/threshOpt/2001_2010_5km_10km_3_2016_INLA_CLIM.tif"), 
             format="GTiff", overwrite=TRUE)
 
 psi.pred.raster17<-raster(matrix(preds7$psi, nrow(theta17), ncol(theta17), byrow=T), crs=proj4string(theta17))
-writeRaster(x=psi.pred.raster17, filename=here("./Data/Model Predictions/threshOpt/2001_2010_5km_5km_3_2017_INLA_CLIM.tif"), 
+writeRaster(x=psi.pred.raster17, filename=here("./Data/Model Predictions/threshOpt/2001_2010_5km_10km_3_2017_INLA_CLIM.tif"), 
             format="GTiff", overwrite=TRUE)
 
 psi.pred.raster18<-raster(matrix(preds8$psi, nrow(theta18), ncol(theta18), byrow=T), crs=proj4string(theta18))
-writeRaster(x=psi.pred.raster18, filename=here("./Data/Model Predictions/threshOpt/2001_2010_5km_5km_3_2018_INLA_CLIM.tif"), 
+writeRaster(x=psi.pred.raster18, filename=here("./Data/Model Predictions/threshOpt/2001_2010_5km_10km_3_2018_INLA_CLIM.tif"), 
             format="GTiff", overwrite=TRUE)
 
 psi.pred.raster19<-raster(matrix(preds9$psi, nrow(theta19), ncol(theta19), byrow=T), crs=proj4string(theta19))
-writeRaster(x=psi.pred.raster19, filename=here("./Data/Model Predictions/threshOpt/2001_2010_5km_5km_3_2019_INLA_CLIM.tif"), 
+writeRaster(x=psi.pred.raster19, filename=here("./Data/Model Predictions/threshOpt/2001_2010_5km_10km_3_2019_INLA_CLIM.tif"), 
             format="GTiff", overwrite=TRUE)
 
 ## Plots!!
 par(mfrow = c(3, 2))
-plot(psi.pred.raster11, main="5km, 3. predictions 2011")
-plot(theta11, main="5km, 3. actual 2011")
+plot(psi.pred.raster11, main="10km, 3. predictions 2011")
+plot(theta11, main="10km, 3. actual 2011")
 
-plot(psi.pred.raster12, main="5km, 3. predictions 2012")
-plot(theta12, main="5km, 3. actual 2012")
+plot(psi.pred.raster12, main="10km, 3. predictions 2012")
+plot(theta12, main="10km, 3. actual 2012")
 
-plot(psi.pred.raster13, main="5km, 3. predictions 2013")
-plot(theta13, main="5km, 3. actual 2013")
+plot(psi.pred.raster13, main="10km, 3. predictions 2013")
+plot(theta13, main="10km, 3. actual 2013")
 
-plot(psi.pred.raster14, main="5km, 3. predictions 2014")
-plot(theta14, main="5km, 3. actual 2014")
+plot(psi.pred.raster14, main="10km, 3. predictions 2014")
+plot(theta14, main="10km, 3. actual 2014")
 
-plot(psi.pred.raster15, main="5km, 3. predictions 2015")
-plot(theta15, main="5km, 3. actual 2015")
+plot(psi.pred.raster15, main="10km, 3. predictions 2015")
+plot(theta15, main="10km, 3. actual 2015")
 
-plot(psi.pred.raster16, main="5km, 3. predictions 2016")
-plot(theta16, main="5km, 3. actual 2016")
+plot(psi.pred.raster16, main="10km, 3. predictions 2016")
+plot(theta16, main="10km, 3. actual 2016")
 
-plot(psi.pred.raster17, main="5km, 3. predictions 2017")
-plot(theta17, main="5km, 3. actual 2017")
+plot(psi.pred.raster17, main="10km, 3. predictions 2017")
+plot(theta17, main="10km, 3. actual 2017")
 
-plot(psi.pred.raster18, main="5km, 3. predictions 2018")
-plot(theta18, main="5km, 3. actual 2018")
+plot(psi.pred.raster18, main="10km, 3. predictions 2018")
+plot(theta18, main="10km, 3. actual 2018")
 
-plot(psi.pred.raster19, main="5km, 3. predictions 2019")
-plot(theta19, main="5km, 3. actual 2019")
+plot(psi.pred.raster19, main="10km, 3. predictions 2019")
+plot(theta19, main="10km, 3. actual 2019")
 
 #### New section on outputting results to save
 
@@ -399,5 +399,5 @@ toSave <- list(model = result
 #### NOTE: in this sample 'preds' is not year specific--make sure the right 'preds' are used when 
 #### predictions are extended to multiple years
 
-saveRDS(toSave, here("Data/Model Predictions/threshOpt/accuracy_2001-2010_5km_5km_3_INLA_CLIM.RDS"))
+saveRDS(toSave, here("Data/Model Predictions/threshOpt/accuracy_2001-2010_5km_10km_3_INLA_CLIM.RDS"))
 
